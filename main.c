@@ -36,10 +36,12 @@
 #include <fcntl.h>
 
 int main(int c, char** v) {
-    uint16_t i, j, k, m, w[32];
+    uint16_t i, j, k, m;
+    uint8_t w[32]; //works as uint8_t ?
     mpf_t mpf_bin;
-
+    uint16_t h[32];
     char hex[32];
+    char str2[2];
 
     char * dec = gmp_todec("0b\
 1111001111111111\
@@ -59,29 +61,32 @@ int main(int c, char** v) {
 1111100000001111\
 1111111000111111");
 
-    printf("DECIMAL REPR:");
+    printf("DECIMAL REPR: ");
     printf(dec);
     printf("\n");
+
     memcpy(hex, gmp_tobase(dec, 16), 64);
 
-    printf("HEX REPR:");
+    printf("HEX REPR: ");
     printf(hex);
     printf("\n");
     printf("LENGTH of HEX string is = %d\n", strlen(hex));
+    printf("HEX REPR 2: ");
 
-    char str2[2];
-
-    printf("\n");
-
+    FILE *fp = fopen("HEX REPR.txt", "w");
     for (int i = 0; i < 32; i++) {
 	strncpy(str2, hex + (i * 2), sizeof (str2));
-	w[i] = (wchar_t) strtol(str2, NULL, 16);
+	w[i] = strtol(str2, NULL, 16);
 	printf("%02X ", w[i]);
+	//sprintf(h, "%02X", str2);
+	//fwrite(h, sizeof (char), wcslen(h), fp);
+	//fwrite(" ", sizeof (wchar_t), 1, fp);
     }
+    fclose(fp);
     printf("\n");
 
     _setmode(_fileno(stdout), _O_TEXT);
-    FILE *fp = fopen("ASCII REPR.txt", "w");
+    fp = fopen("ASCII REPR.txt", "w");
     fwrite(w, sizeof (wchar_t), wcslen(w), fp);
     fclose(fp);
     printf("_O_TEXT:\n");
@@ -96,7 +101,8 @@ int main(int c, char** v) {
     printf("\n");
 
     for (int i = 0; i < 32; i += 2, puts("")) for (int j = 3; j--;) for (k = 2; k--;) for (m = 256; m > 1; (m >>= 1, printf((~w[i + 1 - k] & m) ? "##" : "  ")));
-
+    free(fp);
+    free(dec);
     return 0;
 
 }
