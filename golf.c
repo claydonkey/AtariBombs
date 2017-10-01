@@ -6,8 +6,8 @@
 #include <wchar.h>
 #include <fcntl.h>
 
-
-main(c,v)char**v;
+// NB must be run with an argument
+main2(c,v)char**v;
 {
     wchar_t i, j, k, m, w[] = L"óÿ­ÿþÿoÜüðààÀÀ!ÀCàCðøþ?ⓙ";
     for (i; i < 32; i += 2, puts(""))

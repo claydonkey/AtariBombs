@@ -38,6 +38,14 @@ CND_ARTIFACT_PATH_Arch_Debug_5.3.0=dist/Arch_Debug_5.3.0/GNU-Linux/ataribombs
 CND_PACKAGE_DIR_Arch_Debug_5.3.0=dist/Arch_Debug_5.3.0/GNU-Linux/package
 CND_PACKAGE_NAME_Arch_Debug_5.3.0=ataribombs.tar
 CND_PACKAGE_PATH_Arch_Debug_5.3.0=dist/Arch_Debug_5.3.0/GNU-Linux/package/ataribombs.tar
+# Arch_Debug_7.1.0_UTF-16 configuration
+CND_PLATFORM_Arch_Debug_7.1.0_UTF-16=GNU-Linux
+CND_ARTIFACT_DIR_Arch_Debug_7.1.0_UTF-16=dist/Arch_Debug_7.1.0_UTF-16/GNU-Linux
+CND_ARTIFACT_NAME_Arch_Debug_7.1.0_UTF-16=ataribombs
+CND_ARTIFACT_PATH_Arch_Debug_7.1.0_UTF-16=dist/Arch_Debug_7.1.0_UTF-16/GNU-Linux/ataribombs
+CND_PACKAGE_DIR_Arch_Debug_7.1.0_UTF-16=dist/Arch_Debug_7.1.0_UTF-16/GNU-Linux/package
+CND_PACKAGE_NAME_Arch_Debug_7.1.0_UTF-16=ataribombs.tar
+CND_PACKAGE_PATH_Arch_Debug_7.1.0_UTF-16=dist/Arch_Debug_7.1.0_UTF-16/GNU-Linux/package/ataribombs.tar
 #
 # include compiler specific variables
 #

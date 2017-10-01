@@ -100,10 +100,10 @@ int main(int c, char** v) {
 	w[i] = (wchar_t) strtol(str2, NULL, 16);
 	w2[i] = (char) strtol(str2, NULL, 16);
     }
-    FILE *fp = fopen("test.txt", "w");
-    fwrite(w, sizeof (wchar_t), wcslen(w), fp);
+    FILE *pFile = fopen("test.txt", "w");
+    fwrite(w, sizeof (wchar_t), wcslen(w), pFile);
 
-    fclose(fp);
+    fclose(pFile);
 
 
     printf("\n");

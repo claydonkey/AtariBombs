@@ -23,7 +23,7 @@ AS=as
 # Macros
 CND_PLATFORM=GNU-Linux
 CND_DLIB_EXT=so
-CND_CONF=Arch_Debug_5.3.0
+CND_CONF=Arch_Debug_7.1.0_UTF-16
 CND_DISTDIR=dist
 CND_BUILDDIR=build
 
@@ -35,11 +35,11 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/utf16.o
 
 
 # C Compiler Flags
-CFLAGS=-m64 -march=x86-64 -mtune=generic -O2 -pipe
+CFLAGS=-m64 -march=x86-64 -mtune=generic -O2 -pipe -fno-stack-protector -fwide-exec-charset=utf-16 -finput-charset=utf-16
 
 # CC Compiler Flags
 CCFLAGS=
@@ -65,10 +65,10 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ataribombs: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ataribombs ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/main.o: main.c
+${OBJECTDIR}/utf16.o: utf16.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I../../CPP/GM_GMP -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.c
+	$(COMPILE.c) -g -I../../CPP/GM_GMP -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utf16.o utf16.c
 
 # Subprojects
 .build-subprojects:

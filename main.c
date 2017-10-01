@@ -25,7 +25,6 @@
  * @author Anthony Campbell contact@claydonkey.com
  */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "gmgmp.h"
@@ -33,16 +32,45 @@
 #include <stdio.h>
 #include <wchar.h>
 #include <fcntl.h>
+#include <string.h>
 
-int main(int c, char** v) {
-    uint16_t i, j, k, m;
-    uint8_t w[32]; //works as uint8_t ?
-    mpf_t mpf_bin;
-    uint16_t h[32];
-    char hex[32];
-    char str2[2];
+/*
+ require CFLAGS=-march=x86-64 -mtune=generic -O2 -pipe -fno-stack-protector 
+ * this is from GPG and it is how it was compiled
+ * -fwide-exec-charset=utf-16  -finput-charset=utf-16 -fexec-charset=utf-16 for getting to 16bit widechars
+ */
 
-    char * dec = gmp_todec("0b\
+void
+Answer2 (int cnt)
+{
+  wchar_t i, j, k, m, w[32] = L"귿﻿潿�ﰟ쀁쀡쁃︿";
+  for (i; i < 32; i += 2, puts (""))
+    for (j = cnt; j--;)
+      for (k = 2; k--;)
+        for (m = 256; m > 1; (m >>= 1, printf ((w[i + 1 - k] & m) ? "  " : "##")));
+}
+
+void
+Answer (int cnt)
+{
+  wchar_t i, j, k, m, w[32] = L"óÿ­ÿþÿoÜüðààÀÀ!ÀCàCðøþ?";
+  for (i; i < 32; i += 2, puts (""))
+    for (j = cnt; j--;)
+      for (k = 2; k--;)
+        for (m = 256; m > 1; (m >>= 1, printf ((w[i + 1 - k] & m) ? "  " : "##")));
+}
+
+int
+main (int c, char** v)
+{
+  uint16_t i, j, k, m;
+  uint8_t what[32]; //works as uint8_t ?
+  // mpf_t mpf_bin; # pulls in stack protector
+  uint8_t hex[64];
+
+  uint8_t str[2];
+
+  const uint8_t * dec = gmp_todec ("0b\
 1111001111111111\
 1010110111111111\
 1111111011111111\
@@ -60,52 +88,61 @@ int main(int c, char** v) {
 1111100000001111\
 1111111000111111");
 
-    printf("DECIMAL REPR: ");
-    printf(dec);
-    printf("\n");
 
-    memcpy(hex, gmp_tobase(dec, 16), 64);
+  Answer (3);
 
-    printf("HEX REPR: ");
-    printf(hex);
-    printf("\n");
-    printf("LENGTH of HEX string is = %d\n", strlen(hex));
-    printf("HEX REPR 2: ");
+  printf ("DECIMAL REPR: %s\n", dec);
 
-    FILE *fp = fopen("HEX REPR.txt", "w");
-    for (int i = 0; i < 32; i++) {
-	strncpy(str2, hex + (i * 2), sizeof (str2));
-	w[i] = strtol(str2, NULL, 16);
-	printf("%02X ", w[i]);
-	//sprintf(h, "%02X", str2);
-	//fwrite(h, sizeof (char), wcslen(h), fp);
-	//fwrite(" ", sizeof (wchar_t), 1, fp);
+
+  memcpy (hex, gmp_tobase (dec, 16), 64);
+
+  printf ("HEX REPR: %s\n", hex);
+  printf ("LENGTH of HEX string is = %d\n", strlen (hex));
+  printf ("HEX REPR 2: ");
+
+  FILE *pFile = fopen ("HEX REPR.txt", "w");
+  uint8_t h[2];
+  for (int i = 0; i < 32; i++)
+    {
+      strncpy (str, hex + (i * 2), sizeof (str));
+      what[i] = strtol (str, NULL, 16);
+      printf ("%02X ", what[i]);
     }
-    fclose(fp);
-    printf("\n");
+  fwrite (hex, sizeof (uint8_t), 64, pFile);
+  fwrite (" ", sizeof (uint8_t), 1, pFile);
+  fclose (pFile);
+  printf ("\n");
 #if defined(_MSC_VER)
-    _setmode(_fileno(stdout), _O_TEXT);
+  _setmode (_fileno (stdout), _O_TEXT);
 #endif
-    FILE *fp = fopen("ASCII REPR.txt", "w");
-    fp = fopen("ASCII REPR.txt", "w");
-    fwrite(w, sizeof (wchar_t), wcslen(w), fp);
-    fclose(fp);
-    printf("_O_TEXT:\n");
-    wprintf(w);
-    printf("\n");
-    printf("_O_U16TEXT:\n");
-#if defined(_MSC_VER)
-    _setmode(_fileno(stdout), _O_U16TEXT);
-#endif
-    wprintf(w);
-#if defined(_MSC_VER)
-    _setmode(_fileno(stdout), _O_TEXT);
-#endif
-    printf("\n");
+  uint8_t bom[] = {0xFF, 0xFE};
+  what[32] = '\0';
+  pFile = fopen ("ASCII REPR.txt", "w");
+  fwrite (what, sizeof (uint8_t), 32, pFile);
+  fclose (pFile);
 
-    for (int i = 0; i < 32; i += 2, puts("")) for (int j = 3; j--;) for (k = 2; k--;) for (m = 256; m > 1; (m >>= 1, printf((~w[i + 1 - k] & m) ? "##" : "  ")));
-    free(fp);
-    free(dec);
-    return 0;
+  pFile = fopen ("UTF-16 REPR.txt", "w");
+  fwrite (bom, sizeof (uint8_t), sizeof (bom), pFile);
+  fwrite (what, sizeof (uint8_t), 32, pFile);
+
+  printf ("_O_TEXT:\n");
+  fclose (pFile);
+  printf (what);
+  printf ("\n");
+  printf ("_O_U16TEXT:\n");
+#if defined(_MSC_VER)
+  _setmode (_fileno (stdout), _O_U16TEXT)16;
+#endif
+  printf (what);
+#if defined(_MSC_VER)
+  _setmode (_fileno (stdout), _O_TEXT);
+#endif
+  printf ("\n");
+
+  for (int i = 0; i < 32; i += 2, puts ("")) for (int j = 3; j--;) for (k = 2; k--;) for (m = 256; m > 1; (m >>= 1, printf ((~what[i + 1 - k] & m) ? "##" : "  ")));
+  free (pFile);
+  free ((char*) dec);
+
+  return 0;
 
 }

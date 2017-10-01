@@ -31,7 +31,7 @@ DEFAULTCONF=Debug_gcc_5.3.0
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=Debug_gcc_5.3.0 Release Debug_gcc_7.2.0 Arch_Debug_5.3.0 
+ALLCONFS=Debug_gcc_5.3.0 Release Debug_gcc_7.2.0 Arch_Debug_5.3.0 Arch_Debug_7.1.0_UTF-16 
 
 
 # build
