@@ -30,6 +30,14 @@ CND_ARTIFACT_PATH_Debug_gcc_7.2.0=dist/Debug_gcc_7.2.0/x86_64-w64-mingw32-Window
 CND_PACKAGE_DIR_Debug_gcc_7.2.0=dist/Debug_gcc_7.2.0/x86_64-w64-mingw32-Windows/package
 CND_PACKAGE_NAME_Debug_gcc_7.2.0=ataribombs.tar
 CND_PACKAGE_PATH_Debug_gcc_7.2.0=dist/Debug_gcc_7.2.0/x86_64-w64-mingw32-Windows/package/ataribombs.tar
+# Arch_Debug_5.3.0 configuration
+CND_PLATFORM_Arch_Debug_5.3.0=GNU-Linux
+CND_ARTIFACT_DIR_Arch_Debug_5.3.0=dist/Arch_Debug_5.3.0/GNU-Linux
+CND_ARTIFACT_NAME_Arch_Debug_5.3.0=ataribombs
+CND_ARTIFACT_PATH_Arch_Debug_5.3.0=dist/Arch_Debug_5.3.0/GNU-Linux/ataribombs
+CND_PACKAGE_DIR_Arch_Debug_5.3.0=dist/Arch_Debug_5.3.0/GNU-Linux/package
+CND_PACKAGE_NAME_Arch_Debug_5.3.0=ataribombs.tar
+CND_PACKAGE_PATH_Arch_Debug_5.3.0=dist/Arch_Debug_5.3.0/GNU-Linux/package/ataribombs.tar
 #
 # include compiler specific variables
 #

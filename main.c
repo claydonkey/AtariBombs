@@ -67,20 +67,21 @@ int main(int c, char** v) {
     printf("HEX REPR:");
     printf(hex);
     printf("\n");
-    printf("LENGTH of HEX string is = %d\n", strlen(hex));
+    printf("LE NGTH of HEX string is = %d\n", strlen(hex));
 
     char str2[2];
 
     printf("\n");
 
     for (int i = 0; i < 32; i++) {
-	strncpy(str2, hex + (i * 2), sizeof (str2));
-	w[i] = (wchar_t) strtol(str2, NULL, 16);
-	printf("%02X ", w[i]);
+        strncpy(str2, hex + (i * 2), sizeof (str2));
+        w[i] = (wchar_t) strtol(str2, NULL, 16);
+        printf("%02X ", w[i]);+
     }
     printf("\n");
-
+#if defined(_MSC_VER)
     _setmode(_fileno(stdout), _O_TEXT);
+#endif
     FILE *fp = fopen("ASCII REPR.txt", "w");
     fwrite(w, sizeof (wchar_t), wcslen(w), fp);
     fclose(fp);
@@ -88,11 +89,13 @@ int main(int c, char** v) {
     wprintf(w);
     printf("\n");
     printf("_O_U16TEXT:\n");
-
+#if defined(_MSC_VER)
     _setmode(_fileno(stdout), _O_U16TEXT);
+#endif
     wprintf(w);
-
+#if defined(_MSC_VER)
     _setmode(_fileno(stdout), _O_TEXT);
+#endif
     printf("\n");
 
     for (int i = 0; i < 32; i += 2, puts("")) for (int j = 3; j--;) for (k = 2; k--;) for (m = 256; m > 1; (m >>= 1, printf((~w[i + 1 - k] & m) ? "##" : "  ")));
