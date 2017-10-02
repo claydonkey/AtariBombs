@@ -21,9 +21,9 @@ FC=x86_64-w64-mingw32-gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=MinGW-Windows
+CND_PLATFORM=x86_64-w64-mingw32-Windows
 CND_DLIB_EXT=dll
-CND_CONF=Debug_gcc_5.3.0
+CND_CONF=MinGW_Debug_7.2.0
 CND_DISTDIR=dist
 CND_BUILDDIR=build
 
@@ -39,7 +39,7 @@ OBJECTFILES= \
 
 
 # C Compiler Flags
-CFLAGS=-m64 -fshort-wchar
+CFLAGS=-m64 -march=x86-64 -mtune=generic -O0 -pipe -fno-stack-protector
 
 # CC Compiler Flags
 CCFLAGS=
@@ -52,20 +52,20 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-L../../GM-GMP/dist/Debug/x86_64-w64-mingw32-Windows -lGM-GMP -lgmp
+LDLIBSOPTIONS=-L../../GM-GMP/dist/Debug/MinGW-Windows -lGM-GMP -lgmp
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
 	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ataribombs.exe
-	${CP} ../../GM-GMP/dist/Debug/x86_64-w64-mingw32-Windows/libGM-GMP.dll ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
+	${CP} ../../GM-GMP/dist/Debug/MinGW-Windows/libGM-GMP.dll ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ataribombs.exe: ../../GM-GMP/dist/Debug/x86_64-w64-mingw32-Windows/libGM-GMP.dll
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ataribombs.exe: ../../GM-GMP/dist/Debug/MinGW-Windows/libGM-GMP.dll
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ataribombs.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ataribombs ${OBJECTFILES} ${LDLIBSOPTIONS} -fshort-wchar
+	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ataribombs ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/main.o: main.c
+${OBJECTDIR}/main.o: main.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -I../../GM-GMP -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.c

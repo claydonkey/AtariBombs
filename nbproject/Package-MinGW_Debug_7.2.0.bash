@@ -6,11 +6,11 @@
 
 # Macros
 TOP=`pwd`
-CND_PLATFORM=GNU-Linux
-CND_CONF=Arch_Debug_7.1.0_UTF-16
+CND_PLATFORM=x86_64-w64-mingw32-Windows
+CND_CONF=MinGW_Debug_7.2.0
 CND_DISTDIR=dist
 CND_BUILDDIR=build
-CND_DLIB_EXT=so
+CND_DLIB_EXT=dll
 NBTMPDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tmp-packaging
 TMPDIRNAME=tmp-packaging
 OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ataribombs
@@ -98,6 +98,14 @@ copyFileToTmpDir "${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libGM_GMP.so" "${NB
 cd "${TOP}"
 makeDirectory "${NBTMPDIR}/ataribombs/bin"
 copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
+
+cd "${TOP}"
+makeDirectory "${NBTMPDIR}/ataribombs/bin"
+copyFileToTmpDir "${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libGM-GMP.dll" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/libGM-GMP.dll" 0755
+
+cd "${TOP}"
+makeDirectory "${NBTMPDIR}/ataribombs/bin"
+copyFileToTmpDir "${OUTPUT_PATH}.exe" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}.exe" 0755
 
 
 # Generate tar file

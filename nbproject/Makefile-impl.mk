@@ -27,11 +27,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=AtariBombs
 
 # Active Configuration
-DEFAULTCONF=Debug_gcc_5.3.0
+DEFAULTCONF=Arch_Debug_7.1.0
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=Debug_gcc_5.3.0 Release Debug_gcc_7.2.0 Arch_Debug_7.1.0 Arch_Debug_7.1.0_UTF-16 Ans_Arch_Debug_7.1.0 
+ALLCONFS=Arch_Debug_7.1.0 Ans_Arch_Debug_7.1.0 MinGW_Debug_7.2.0 
 
 
 # build

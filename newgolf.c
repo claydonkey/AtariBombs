@@ -58,7 +58,7 @@ void Answer(int cnt) {
 
 int main(int c, char** v) {
     uint16_t i, j, k, m;
-    uint8_t what[33]; //works as uint8_t ?
+    uint8_t w16[33]; //works as uint8_t ?
     // mpf_t mpf_bin; # pulls in stack protector
     uint8_t hex[33];
     uint8_t str[2];
@@ -100,8 +100,8 @@ int main(int c, char** v) {
     uint8_t h[2];
     for (int i = 0; i < 33; i++) {
         strncpy(str, hex + (i * 2), sizeof (str));
-        what[i] = strtol(str, pEnd, 16);
-        printf("%02X ", what[i]);
+        w16[i] = strtol(str, pEnd, 16);
+        printf("%02X ", w16[i]);
     }
     fwrite(hex, sizeof (uint8_t), 64, pFile);
     fwrite(" ", sizeof (uint8_t), 1, pFile);
@@ -112,24 +112,24 @@ int main(int c, char** v) {
 #endif
     uint8_t bom[] ={0xFF, 0xFE};
     pFile = fopen("ASCII REPR.txt", "w");
-    //fwrite(what, sizeof (wchar_t), wcslen(what), pFile);
+    //fwrite(w16, sizeof (wchar_t), wcslen(w16), pFile);
     fwrite(bom, sizeof (uint8_t), sizeof (bom), pFile);
-    fwrite(what, sizeof (uint8_t), 32, pFile);
+    fwrite(w16, sizeof (uint8_t), 32, pFile);
     fclose(pFile);
     printf("_O_TEXT:\n");
-    printf(what);
+    printf(w16);
     printf("\n");
     printf("_O_U16TEXT:\n");
 #if defined(_MSC_VER)
     _setmode(_fileno(stdout), _O_U16TEXT)16;
 #endif
-    printf(what);
+    printf(w16);
 #if defined(_MSC_VER)
     _setmode(_fileno(stdout), _O_TEXT);
 #endif
     printf("\n");
 
-    for (int i = 0; i < 32; i += 2, puts("")) for (int j = 3; j--;) for (k = 2; k--;) for (m = 256; m > 1; (m >>= 1, printf((~what[i + 1 - k] & m) ? "##" : "  ")));
+    for (int i = 0; i < 32; i += 2, puts("")) for (int j = 3; j--;) for (k = 2; k--;) for (m = 256; m > 1; (m >>= 1, printf((~w16[i + 1 - k] & m) ? "##" : "  ")));
     //    free(pFile);
     //  free(dec);
 
