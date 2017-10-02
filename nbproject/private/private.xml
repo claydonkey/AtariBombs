@@ -4,11 +4,17 @@
         <activeConfTypeElem>1</activeConfTypeElem>
         <activeConfIndexElem>3</activeConfIndexElem>
     </data>
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>UTF-16%20REPR.txt</url>
+            <bookmark id="1">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/anthony/Documents/Source/CodeGolf/AtariBombs/main.c</file>
-            <file>file:/home/anthony/Documents/Source/CodeGolf/AtariBombs/golf.c</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -23,7 +23,7 @@ AS=as
 # Macros
 CND_PLATFORM=GNU-Linux
 CND_DLIB_EXT=so
-CND_CONF=Arch_Debug_5.3.0
+CND_CONF=Arch_Debug_7.1.0
 CND_DISTDIR=dist
 CND_BUILDDIR=build
 
@@ -39,7 +39,7 @@ OBJECTFILES= \
 
 
 # C Compiler Flags
-CFLAGS=-m64 -march=x86-64 -mtune=generic -O2 -pipe
+CFLAGS=-m64 -march=x86-64 -mtune=generic -O0 -pipe -fno-stack-protector
 
 # CC Compiler Flags
 CCFLAGS=

@@ -23,7 +23,7 @@ AS=as
 # Macros
 CND_PLATFORM=GNU-Linux
 CND_DLIB_EXT=so
-CND_CONF=Arch_Debug_7.1.0_UTF-16
+CND_CONF=Ans_Arch_Debug_7.1.0
 CND_DISTDIR=dist
 CND_BUILDDIR=build
 
@@ -35,13 +35,12 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/katana.o \
-	${OBJECTDIR}/utf16.o \
+	${OBJECTDIR}/golf.o \
 	${OBJECTDIR}/widegolf.o
 
 
 # C Compiler Flags
-CFLAGS=-m64 -march=x86-64 -mtune=generic -O2 -pipe -fno-stack-protector -fwide-exec-charset=utf-16 -finput-charset=utf-16
+CFLAGS=-m64 -march=x86-64 -mtune=generic -O0 -pipe
 
 # CC Compiler Flags
 CCFLAGS=
@@ -67,15 +66,10 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ataribombs: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ataribombs ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/katana.o: katana.c
+${OBJECTDIR}/golf.o: golf.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I../../CPP/GM_GMP -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/katana.o katana.c
-
-${OBJECTDIR}/utf16.o: utf16.c
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.c) -g -I../../CPP/GM_GMP -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utf16.o utf16.c
+	$(COMPILE.c) -g -I../../CPP/GM_GMP -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/golf.o golf.c
 
 ${OBJECTDIR}/widegolf.o: widegolf.c
 	${MKDIR} -p ${OBJECTDIR}
