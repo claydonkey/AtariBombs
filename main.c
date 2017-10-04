@@ -132,7 +132,7 @@ int main(int c, char** v) {
 	printf("%02X ", w8[i]);
     }
 
-    fwrite(hex, sizeof (wchar_t), 32, pFile);
+    fwrite(hex, sizeof (uint16_t), 32, pFile);
 
     fclose(pFile);
     printf("\n");
