@@ -62,3 +62,53 @@ Below is the reference output for two bombs, where mandatory line-breaks are mar
 (Of course, other line-break formats such as \r or \r\n may be used just as well.)
 Rules
 This is code-golf, so the shortest answer in bytes wins. Standard loopholes are forbidden.
+
+
+# Solution
+
+#GCC C 135 bytes ISO8859/ 174 bytes UTF-8
+
+## ASCII
+```
+f(r,i,j,d){
+    for(;i<32;i+=2,puts(""))
+        for(d=15*r;--d;)
+             printf("%s",(*(int*)&("ÿóÿ­ÿþoÜüðààÀ!ÀCÀCàðø?þ"[i]))&(1<<d%15)?"  ":"##");
+}
+```
+In one line:
+```
+f(r,i,j,d){for(;i<32;i+=2,puts(""))for(d=15*r;--d;)printf("%s",(*(int*)&("ÿóÿ­ÿþoÜüðààÀ!ÀCÀCàðø?þ"[i]))&(1<<d%15)?"  ":"##");}
+```
+### Run with:
+```
+main(c,v)char**v{f(2,0)}
+```
+Compile source as ISO8859-x (ASCII).
+NB óÿ­ÿþÿoÜüðààÀÀ!ÀCàCðøþ? should contain the invisible ASCII Codes but it has been broken due to the way StackExchange presents its content. Please see the ideaone link for proper test encoding Alternatively the original ASCII String is at : https://github.com/claydonkey/AtariBombs/blob/master/ISO8859_REPR2.txt
+
+## Explanation
+
+First a conversion of the hex representation of bombs [f3 ff ad ff fe ff 6f 7f dc 1f fc 1f f0 07 e0 03 e0 03 c0 01 c0 21 c0 43 e0 43 f0 07 f8 0f fe 3f] to UTF-8 (in the UTF-8 version the compiler stores the string as Wide Char Array - 2 or 4 bytes for each character at runtime but this is academic). Whereas UTF-8 characters would be stored as 2-4 bytes, these values are all within ISO-8859-1 (ASCII) and thus only require 1 byte. Also it is safe to be stored as ISO-8859-x (there are no 0x8_ or 0x9_ values). Therefore the text consumes 32 bytes in ISO-8859 and the routine consumes 135 bytes in total.
+(NB wide chars are stored as a 16 bit integer in windows and 32bit in linux but again this is irrelevant to the task at hand)
+Caveat: Not all the characters are displayable (the control characters below 0x20) .They are, however still present . Most web pages are utf-8/ 8859/1253 (https://w3techs.com/technologies/overview/character_encoding/all) so I reckon this is legit(shifting all values below 0x20 to printable ASCII should fix that). 
+
+## UTF-8
+
+Here is the version closer to the original posting with UTF-8 encoded source. This consumes 174 bytes. The string itself being 50 bytes of the source. The routine is also longer as the ASCII bytes are now stored with padding 0's for the 16bit/32bit Wide Chars and have to be shifted instead of casted to uint16_t as above. I have kept this up as it can be verified with ideone which uses UTF-8 encoding.
+```
+*w=L"óÿ­ÿþÿoÜüðààÀÀ!ÀCàCðøþ?";
+f(r,i,j,m){
+    for(i;i<32;i+=2,puts(""))
+        for(j=r;j--;)
+            for(m=65536;m>1;(m>>=1,printf(((w[i]<<8)+w[i+1]&m)?"  ":"##")));
+}
+```
+### Run with:
+```
+main(){f(2,0);} 
+```
+
+If you can set the implicit value to a 16bit integer in your complier you can omit the wchar_t type declaration of the Wide Char. Ideone doesn't complain so I reckon it's good to go.
+Try it out on [ideone]: https://ideone.com/Aqz63S
+ 
