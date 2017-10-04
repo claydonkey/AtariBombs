@@ -66,7 +66,12 @@ void AnswerASCII(int r) {
 void AnswerUTF(int r) {
     uint8_t i, j;
     int32_t m;
-    uint16_t *w = L"ÿóÿ­ÿþoÜüðààÀ!ÀCÀCàðø?þ";
+#ifdef __MINGW__ 
+    uint16_t 
+#else
+    uint32_t  
+#endif            
+            *w = L"ÿóÿ­ÿþoÜüðààÀ!ÀCÀCàðø?þ";
 
     for (i = 0; i < 32; i += 2, puts(""))for (j = r; j--;)for (m = 65536; m > 1; (m /= 2, printf(((w[i+1] << 8) + w[i] & m) ? "  " : "##")));
 
@@ -74,8 +79,8 @@ void AnswerUTF(int r) {
 
 int main(int c, char** v) {
 
-    AnswerUTF(3);
-    AnswerASCII(3);
+   AnswerUTF(3);
+  //  AnswerASCII(3);
     uint16_t i, k, m;
     uint16_t w16[33];
     w16[32] = '\0';

@@ -7,7 +7,7 @@
 # Macros
 TOP=`pwd`
 CND_PLATFORM=GNU-Linux
-CND_CONF=Ans_Arch_Debug_7.1.0
+CND_CONF=Arch_Debug_7.1.0_UTF8
 CND_DISTDIR=dist
 CND_BUILDDIR=build
 CND_DLIB_EXT=so
@@ -66,6 +66,22 @@ copyFileToTmpDir "${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libGM-GMP.dll" "${N
 cd "${TOP}"
 makeDirectory "${NBTMPDIR}/ataribombs/bin"
 copyFileToTmpDir "${OUTPUT_PATH}.exe" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}.exe" 0755
+
+cd "${TOP}"
+makeDirectory "${NBTMPDIR}/ataribombs/bin"
+copyFileToTmpDir "${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libGM_GMP.so" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/libGM_GMP.so" 0755
+
+cd "${TOP}"
+makeDirectory "${NBTMPDIR}/ataribombs/bin"
+copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
+
+cd "${TOP}"
+makeDirectory "${NBTMPDIR}/ataribombs/bin"
+copyFileToTmpDir "${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libGM_GMP.so" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/libGM_GMP.so" 0755
+
+cd "${TOP}"
+makeDirectory "${NBTMPDIR}/ataribombs/bin"
+copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 cd "${TOP}"
 makeDirectory "${NBTMPDIR}/ataribombs/bin"
