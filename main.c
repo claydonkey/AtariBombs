@@ -33,20 +33,14 @@
 #include <wchar.h>
 #include <fcntl.h>
 #include <string.h>
+#include "widegolf.h"
 
-#if defined(_MSC_VER) || defined  (__MINGW32__)
-
-#else
-#define  _O_U8TEXT 0x00040000
-#define  _O_U16TEXT 0x00020000
-#endif
 
 /*
  require CFLAGS=-march=x86-64 -mtune=generic -O2 -pipe -fno-stack-protector
  * this is from GPG and it is how it was compiled
  * -fwide-exec-charset=utf-16  -finput-charset=utf-16 -fexec-charset=utf-16 for getting to 16bit widechars
  */
-
 
 
 uint8_t ascii_to_utf8(uint8_t *out, uint8_t asc, uint8_t ctr) {
@@ -60,26 +54,28 @@ uint8_t ascii_to_utf8(uint8_t *out, uint8_t asc, uint8_t ctr) {
     }
 }
 
-void Answer2(int cnt) {
-    wchar_t i, j, k, m, w[32] = L"귿﻿潿�ﰟ쀁쀡쁃︿";
-    for (i; i < 32; i += 2, puts(""))
-	for (j = cnt; j--;)
-	    for (k = 2; k--;)
-		for (m = 256; m > 1; (m >>= 1, printf((w[i + 1 - k] & m) ? "  " : "##")));
+
+void AnswerASCII(int r) {
+    uint8_t i, j;
+    int32_t m;
+    uint8_t   *w = "ÿóÿ­ÿþoÜüðààÀ!ÀCÀCàðø?þ";
+    for (i; i < 32; i += 2, puts(""))for (j = r; j--;)for (m = 1 << 16; m > 1; printf(((m /= 2)&((w[i+1] << 8) + w[i]) ? "  " : "##")));
 }
 
-void Answer(int cnt) {
-    wchar_t i, j, k, m, w[32] = L"óÿ­ÿþÿoÜüðààÀÀ!ÀCàCðøþ?";
-    for (i; i < 32; i += 2, puts(""))
-	for (j = cnt; j--;)
-	    for (k = 2; k--;)
-		for (m = 256; m > 1; (m >>= 1, printf((w[i + 1 - k] & m) ? "  " : "##")));
+
+void AnswerUTF(int r) {
+    uint8_t i, j;
+    int32_t m;
+    uint16_t *w = L"ÿóÿ­ÿþoÜüðààÀ!ÀCÀCàðø?þ";
+
+    for (i = 0; i < 32; i += 2, puts(""))for (j = r; j--;)for (m = 65536; m > 1; (m /= 2, printf(((w[i+1] << 8) + w[i] & m) ? "  " : "##")));
+
 }
 
 int main(int c, char** v) {
 
-    Answer(3);
-
+    AnswerUTF(3);
+    AnswerASCII(3);
     uint16_t i, k, m;
     uint16_t w16[33];
     w16[32] = '\0';
@@ -182,7 +178,7 @@ int main(int c, char** v) {
     printf("LENGTH of UTF-8 string is %d\n", strlen((const char *) w16));
     printf("\n");
 
-    for (int i = 0; i < 32; i += 2, puts("")) for (int j = 3; j--;) for (k = 2; k--;) for (m = 256; m > 1; (m >>= 1, printf((~w16[i + 1 - k] & m) ? "##" : "  ")));
+    for (int i = 0; i < 32; i += 2, puts("")) for (int j = 3; j--;) for (k = 2; k--;) for (m = 256; m > 1; (m/=2, printf((~w16[i + 1 - k] & m) ? "##" : "  ")));
 
     return 0;
 

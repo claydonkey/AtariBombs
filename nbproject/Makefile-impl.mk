@@ -31,7 +31,7 @@ DEFAULTCONF=Arch_Debug_7.1.0
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=Arch_Debug_7.1.0 Ans_Arch_Debug_7.1.0 MinGW_Debug_7.2.0 
+ALLCONFS=Arch_Debug_7.1.0 Ans_Arch_Debug_7.1.0 MinGW_Debug_7.2.0 MinGW_Debug_7.2.0_UTF8 MinGW_Debug_7.2.0_ASCII 
 
 
 # build

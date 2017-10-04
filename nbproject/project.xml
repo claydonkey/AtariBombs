@@ -26,6 +26,14 @@
                     <name>MinGW_Debug_7.2.0</name>
                     <type>1</type>
                 </confElem>
+                <confElem>
+                    <name>MinGW_Debug_7.2.0_UTF8</name>
+                    <type>1</type>
+                </confElem>
+                <confElem>
+                    <name>MinGW_Debug_7.2.0_ASCII</name>
+                    <type>1</type>
+                </confElem>
             </confList>
             <formatting>
                 <project-formatting-style>false</project-formatting-style>

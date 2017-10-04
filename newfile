@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <math.h>
+ 
+int x, n;
+float f_A;
+float chi2 = 0;
+int genotype[4];
+int expected[4];
+ 
+ 
+int main(void){
+    for (x = 1; x <= 3 ; x++)         {
+        printf("Enter a count:");
+        scanf("%d" , &genotype[x]);                 
+    }
+          
+    n = genotype[1]+genotype[2]+genotype[3];
+    f_A = ((2*genotype[1])+(genotype[2]))/(n*2);
+    expected[1] = pow(f_A,2)*n;
+    expected[2] = 2*(f_A)*(1-f_A)*n;
+    expected[3] = pow(1-f_A,2)*n;
+     
+    for (x = 1; x <= 3; x++)    {  
+    chi2 = chi2 + (pow((genotype[x]-expected[x]),2)/(expected[x]));
+    }         
+ 
+    printf("The chi2 value is: %f", chi2);
+     
+    return 0;
+}

@@ -30,6 +30,22 @@ CND_ARTIFACT_PATH_MinGW_Debug_7.2.0=dist/MinGW_Debug_7.2.0/x86_64-w64-mingw32-Wi
 CND_PACKAGE_DIR_MinGW_Debug_7.2.0=dist/MinGW_Debug_7.2.0/x86_64-w64-mingw32-Windows/package
 CND_PACKAGE_NAME_MinGW_Debug_7.2.0=ataribombs.tar
 CND_PACKAGE_PATH_MinGW_Debug_7.2.0=dist/MinGW_Debug_7.2.0/x86_64-w64-mingw32-Windows/package/ataribombs.tar
+# MinGW_Debug_7.2.0_UTF8 configuration
+CND_PLATFORM_MinGW_Debug_7.2.0_UTF8=x86_64-w64-mingw32-Windows
+CND_ARTIFACT_DIR_MinGW_Debug_7.2.0_UTF8=dist/MinGW_Debug_7.2.0_UTF8/x86_64-w64-mingw32-Windows
+CND_ARTIFACT_NAME_MinGW_Debug_7.2.0_UTF8=ataribombs
+CND_ARTIFACT_PATH_MinGW_Debug_7.2.0_UTF8=dist/MinGW_Debug_7.2.0_UTF8/x86_64-w64-mingw32-Windows/ataribombs
+CND_PACKAGE_DIR_MinGW_Debug_7.2.0_UTF8=dist/MinGW_Debug_7.2.0_UTF8/x86_64-w64-mingw32-Windows/package
+CND_PACKAGE_NAME_MinGW_Debug_7.2.0_UTF8=ataribombs.tar
+CND_PACKAGE_PATH_MinGW_Debug_7.2.0_UTF8=dist/MinGW_Debug_7.2.0_UTF8/x86_64-w64-mingw32-Windows/package/ataribombs.tar
+# MinGW_Debug_7.2.0_ASCII configuration
+CND_PLATFORM_MinGW_Debug_7.2.0_ASCII=x86_64-w64-mingw32-Windows
+CND_ARTIFACT_DIR_MinGW_Debug_7.2.0_ASCII=dist/MinGW_Debug_7.2.0_ASCII/x86_64-w64-mingw32-Windows
+CND_ARTIFACT_NAME_MinGW_Debug_7.2.0_ASCII=ataribombs
+CND_ARTIFACT_PATH_MinGW_Debug_7.2.0_ASCII=dist/MinGW_Debug_7.2.0_ASCII/x86_64-w64-mingw32-Windows/ataribombs
+CND_PACKAGE_DIR_MinGW_Debug_7.2.0_ASCII=dist/MinGW_Debug_7.2.0_ASCII/x86_64-w64-mingw32-Windows/package
+CND_PACKAGE_NAME_MinGW_Debug_7.2.0_ASCII=ataribombs.tar
+CND_PACKAGE_PATH_MinGW_Debug_7.2.0_ASCII=dist/MinGW_Debug_7.2.0_ASCII/x86_64-w64-mingw32-Windows/package/ataribombs.tar
 #
 # include compiler specific variables
 #
