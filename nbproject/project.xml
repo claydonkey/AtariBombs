@@ -19,7 +19,11 @@
                     <type>1</type>
                 </confElem>
                 <confElem>
-                    <name>Ans_Arch_Debug_7.1.0</name>
+                    <name>Arch_Debug_7.1.0_UTF8</name>
+                    <type>1</type>
+                </confElem>
+                <confElem>
+                    <name>Arch_Debug_7.1.0_ASCII</name>
                     <type>1</type>
                 </confElem>
                 <confElem>
@@ -36,7 +40,10 @@
                 </confElem>
             </confList>
             <formatting>
-                <project-formatting-style>false</project-formatting-style>
+                <project-formatting-style>true</project-formatting-style>
+                <c-style>Default|NetBeans</c-style>
+                <cpp-style>Default|NetBeans</cpp-style>
+                <header-style>Default|NetBeans</header-style>
             </formatting>
         </data>
     </configuration>

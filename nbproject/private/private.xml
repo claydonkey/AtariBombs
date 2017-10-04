@@ -2,10 +2,32 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <data xmlns="http://www.netbeans.org/ns/make-project-private/1">
         <activeConfTypeElem>1</activeConfTypeElem>
-        <activeConfIndexElem>2</activeConfIndexElem>
+        <activeConfIndexElem>0</activeConfIndexElem>
     </data>
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>UTF-16%20REPR.txt</url>
+            <bookmark id="1">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/Users/anthony/Documents/Minnow/Source/CPP/CodeGolf/AtariBombs/main.c</file>
+            <file>file:/D:/Users/anthony/Documents/Minnow/Source/CPP/CodeGolf/AtariBombs/UTF-8_REPR.txt</file>
+            <file>file:/D:/Users/anthony/Documents/Minnow/Source/CPP/CodeGolf/AtariBombs/widegolf.h</file>
+            <file>file:/D:/Users/anthony/Documents/Minnow/Source/CPP/CodeGolf/AtariBombs/README.md</file>
+            <file>file:/D:/Users/anthony/Documents/Minnow/Source/CPP/CodeGolf/AtariBombs/HEX_REPR.txt</file>
+            <file>file:/D:/Users/anthony/Documents/Minnow/Source/CPP/CodeGolf/AtariBombs/newfile</file>
+            <file>file:/D:/Users/anthony/Documents/Minnow/Source/CPP/CodeGolf/AtariBombs/utf8.c</file>
+            <file>file:/D:/Users/anthony/Documents/Minnow/Source/CPP/CodeGolf/AtariBombs/UTF-16_REPR.txt</file>
+            <file>file:/D:/Users/anthony/Documents/Minnow/Source/CPP/CodeGolf/AtariBombs/ISO8859_REPR.txt</file>
+            <file>file:/D:/Users/anthony/Documents/Minnow/Source/CPP/CodeGolf/AtariBombs/UTF-8_BOM_REPR.txt</file>
+            <file>file:/D:/Users/anthony/Documents/Minnow/Source/CPP/CodeGolf/AtariBombs/ISO8859_REPR2.txt</file>
+            <file>file:/D:/Users/anthony/Documents/Minnow/Source/CPP/CodeGolf/AtariBombs/iso8859.c</file>
+        </group>
     </open-files>
 </project-private>

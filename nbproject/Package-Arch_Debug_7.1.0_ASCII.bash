@@ -7,7 +7,7 @@
 # Macros
 TOP=`pwd`
 CND_PLATFORM=GNU-Linux
-CND_CONF=Arch_Debug_7.1.0
+CND_CONF=Arch_Debug_7.1.0_ASCII
 CND_DISTDIR=dist
 CND_BUILDDIR=build
 CND_DLIB_EXT=so
