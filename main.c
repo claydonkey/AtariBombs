@@ -35,13 +35,27 @@
 #include <string.h>
 #include "widegolf.h"
 
-
 /*
  require CFLAGS=-march=x86-64 -mtune=generic -O2 -pipe -fno-stack-protector
  * this is from GPG and it is how it was compiled
  * -fwide-exec-charset=utf-16  -finput-charset=utf-16 -fexec-charset=utf-16 for getting to 16bit widechars
  */
 
+uint16_t flipl(uint16_t o) {
+    uint8_t i;
+    uint16_t r;
+    for (i = 0; i < 16; i++)
+	r |= ((o >> i) & 1) << (15 - i);
+    return r;
+}
+
+uint8_t flip(uint8_t o) {
+    uint8_t i;
+    uint8_t r;
+    for (i = 0; i < 8; i++)
+	r |= ((o >> i) & 1) << (7 - i);
+    return r;
+}
 
 uint8_t ascii_to_utf8(uint8_t *out, uint8_t asc, uint8_t ctr) {
     if (asc < 128) {
@@ -54,14 +68,12 @@ uint8_t ascii_to_utf8(uint8_t *out, uint8_t asc, uint8_t ctr) {
     }
 }
 
-
 void AnswerASCII(int r) {
     uint8_t i, j;
     int32_t m;
-    uint8_t   *w = "ÿóÿ­ÿþoÜüðààÀ!ÀCÀCàðø?þ";
-    for (i; i < 32; i += 2, puts(""))for (j = r; j--;)for (m = 1 << 16; m > 1; printf(((m /= 2)&((w[i+1] << 8) + w[i]) ? "  " : "##")));
+    uint8_t *w = "ÿóÿ­ÿþoÜüðààÀ!ÀCÀCàðø?þ";
+    for (i; i < 32; i += 2, puts(""))for (j = r; j--;)for (m = 1 << 16; m > 1; printf(((m /= 2)&((w[i + 1] << 8) + w[i]) ? "  " : "##")));
 }
-
 
 void AnswerUTF(int r) {
     uint8_t i, j;
@@ -71,16 +83,16 @@ void AnswerUTF(int r) {
 #else
     uint32_t
 #endif
-            *w = L"ÿóÿ­ÿþoÜüðààÀ!ÀCÀCàðø?þ";
+	    *w = L"ÿóÿ­ÿþoÜüðààÀ!ÀCÀCàðø?þ";
 
-    for (i = 0; i < 32; i += 2, puts(""))for (j = r; j--;)for (m = 65536; m > 1; (m /= 2, printf(((w[i+1] << 8) + w[i] & m) ? "  " : "##")));
+    for (i = 0; i < 32; i += 2, puts(""))for (j = r; j--;)for (m = 65536; m > 1; (m /= 2, printf(((w[i + 1] << 8) + w[i] & m) ? "  " : "##")));
 
 }
 
 int main(int c, char** v) {
 
-   AnswerUTF(3);
-  //  AnswerASCII(3);
+    AnswerUTF(3);
+    //  AnswerASCII(3);
     uint16_t i, k, m;
     uint16_t w16[33];
     w16[32] = '\0';
@@ -88,7 +100,8 @@ int main(int c, char** v) {
     w16[32] = '\0';
     uint8_t str[3];
 
-    const uint8_t * dec = gmp_todec("0b\
+
+    uint8_t * dec = gmp_todec("0b\
 1111001111111111\
 1010110111111111\
 1111111011111111\
@@ -106,7 +119,29 @@ int main(int c, char** v) {
 1111100000001111\
 1111111000111111");
 
+    uint8_t * dec2 = gmp_todec("0b\
+    0000110000000000\
+    0101001000000000\
+    0000000100000000\
+    1001000010000000\
+    0010001111100000\
+    0000001111100000\
+    0000111111111000\
+    0001111111111100\
+    0001111111111100\
+    0011111111111110\
+    0011111111011110\
+    0011111110111100\
+    0001111110111100\
+    0000111111111000\
+    0000011111110000\
+    0000000111000000");
+
+
     const uint8_t * hex = gmp_tobase(dec, 16);
+
+    uint16_t rhex = flipl(0b0000110001111001);
+
 
     printf("SIZE OF uint8_t  is  %d\n", sizeof (uint8_t));
     printf("SIZE OF wchar _t is  %d\n", sizeof (wchar_t));
@@ -121,14 +156,16 @@ int main(int c, char** v) {
     for (uint8_t i = 0; i < 32; i++) {
 	strncpy(str, hex + (i * 2), sizeof (str));
 	str[2] = '\0';
-	w16[i] = strtol(str, '\0', 16);
+	w16[i] = flipl((uint16_t)strtol(str, '\0', 16));
 	printf("%04X ", w16[i]);
+	//w16[i] = flipl(w16[i]);
+	//printf("%04X ", w16[i]);
     }
     printf("'\n");
     for (uint8_t i = 0; i < 32; i++) {
 	strncpy(str, hex + (i * 2), sizeof (str));
 	str[2] = '\0';
-	w8[i] = strtol(str, '\0', 16);
+	w8[i] =  (uint8_t)strtol(str, '\0', 16);
 	printf("%02X ", w8[i]);
     }
 
@@ -141,7 +178,7 @@ int main(int c, char** v) {
 #endif
     uint8_t bom16[] = {0xFF, 0xFE};
     uint8_t bom8[] = {0xEF, 0xBB, 0xBF};
-    w16[32] = '\0';
+    w16[33] = '\0';
 
     pFile = fopen("UTF-8_REPR.txt", "w");
     uint8_t wutf8[64];
@@ -183,8 +220,9 @@ int main(int c, char** v) {
     printf("LENGTH of UTF-8 string is %d\n", strlen((const char *) w16));
     printf("\n");
 
-    for (int i = 0; i < 32; i += 2, puts("")) for (int j = 3; j--;) for (k = 2; k--;) for (m = 256; m > 1; (m/=2, printf((~w16[i + 1 - k] & m) ? "##" : "  ")));
-
+    for (int i = 0; i < 32; i += 2, puts("")) for (int j = 3; j--;) for (k = 2; k--;) for (m = 256; m > 1; (m /= 2, printf((~w16[i + 1 - k] & m) ? "##" : "  ")));
+    free(dec);
+    free(dec2);
     return 0;
 
 }
