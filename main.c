@@ -34,6 +34,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include "widegolf.h"
+#include "bitFlip.h"
 
 /*
  require CFLAGS=-march=x86-64 -mtune=generic -O2 -pipe -fno-stack-protector
@@ -41,19 +42,19 @@
  * -fwide-exec-charset=utf-16  -finput-charset=utf-16 -fexec-charset=utf-16 for getting to 16bit widechars
  */
 
-uint16_t flipl(uint16_t o) {
-    uint8_t i;
+uint16_t flips(uint16_t o) {
+    uint8_t i, s = sizeof (o)*8;
     uint16_t r;
-    for (i = 0; i < 16; i++)
-	r |= ((o >> i) & 1) << (15 - i);
+    for (i = 0; i < s; i++)
+	r |= ((o >> i) & 1) << (s - 1 - i);
     return r;
 }
 
 uint8_t flip(uint8_t o) {
-    uint8_t i;
+    uint8_t i, s = sizeof (o)*8;
     uint8_t r;
-    for (i = 0; i < 8; i++)
-	r |= ((o >> i) & 1) << (7 - i);
+    for (i = 0; i < s; i++)
+	r |= ((o >> i) & 1) << (s - 1 - i);
     return r;
 }
 
@@ -94,12 +95,11 @@ int main(int c, char** v) {
     AnswerUTF(3);
     //  AnswerASCII(3);
     uint16_t i, k, m;
-    uint16_t w16[33];
-    w16[32] = '\0';
+    uint16_t w16[33], w16b[33];
     uint8_t w8[33];
-    w16[32] = '\0';
-    uint8_t str[3];
 
+    uint8_t str[3];
+    uint8_t str2[5];
 
     uint8_t * dec = gmp_todec("0b\
 1111001111111111\
@@ -140,7 +140,7 @@ int main(int c, char** v) {
 
     const uint8_t * hex = gmp_tobase(dec, 16);
 
-    uint16_t rhex = flipl(0b0000110001111001);
+    uint16_t rhex = flips(0b0000110001111001);
 
 
     printf("SIZE OF uint8_t  is  %d\n", sizeof (uint8_t));
@@ -154,22 +154,32 @@ int main(int c, char** v) {
     FILE *pFile = fopen("HEX_REPR.txt", "w");
 
     for (uint8_t i = 0; i < 32; i++) {
-	strncpy(str, hex + (i * 2), sizeof (str));
+	strncpy(str, hex + (i * 2), 2);
 	str[2] = '\0';
-	w16[i] = flipl((uint16_t)strtol(str, '\0', 16));
-	printf("%04X ", w16[i]);
-	//w16[i] = flipl(w16[i]);
-	//printf("%04X ", w16[i]);
-    }
-    printf("'\n");
-    for (uint8_t i = 0; i < 32; i++) {
-	strncpy(str, hex + (i * 2), sizeof (str));
-	str[2] = '\0';
-	w8[i] =  (uint8_t)strtol(str, '\0', 16);
-	printf("%02X ", w8[i]);
+	w16b[i] = flips((uint16_t) strtol(str, '\0', 16)) >> 8;
+	printf("%04X ", w16b[i]);
     }
 
-    fwrite(hex, sizeof (uint16_t), 32, pFile);
+    for (uint8_t i = 0; i < 16; i++) {
+	strncpy(str2, hex + (i * 4), 4);
+	str2[4] = '\0';
+	w16[i] = ((uint16_t) strtol(str2, '\0', 16)) >> 1;
+	w16[i] |= 0x8000;
+	w16[i] = flips(w16[i]);
+	//w16[i] =  ((uint16_t) strtol(str2, '\0', 16));
+	printf("%04X ", w16[i]);
+    }
+
+
+    printf("'\n");
+    for (uint8_t i = 0; i < 32; i++) {
+	strncpy(str, hex + (i * 2), 2);
+	str[2] = '\0';
+	w8[i] = flip((uint8_t) (strtol(str, '\0', 16)));
+	printf("%02X ", w8[i]);
+    }
+    fwrite(&w16[0], 2, 16, pFile);
+    //fwrite(&w8[0], 1, 64, pFile);
 
     fclose(pFile);
     printf("\n");
@@ -178,7 +188,8 @@ int main(int c, char** v) {
 #endif
     uint8_t bom16[] = {0xFF, 0xFE};
     uint8_t bom8[] = {0xEF, 0xBB, 0xBF};
-    w16[33] = '\0';
+    w16[32] = '\0';
+    w8[32] = '\0';
 
     pFile = fopen("UTF-8_REPR.txt", "w");
     uint8_t wutf8[64];
@@ -219,8 +230,9 @@ int main(int c, char** v) {
 #endif
     printf("LENGTH of UTF-8 string is %d\n", strlen((const char *) w16));
     printf("\n");
-
-    for (int i = 0; i < 32; i += 2, puts("")) for (int j = 3; j--;) for (k = 2; k--;) for (m = 256; m > 1; (m /= 2, printf((~w16[i + 1 - k] & m) ? "##" : "  ")));
+    for (int i = 0; i < 16; i++, puts("")) for (int j = 3; j--;) for (m = 32768; m; m /= 2) printf((~w16[i] & m) ? "##" : "  ");
+    for (int i = 0; i < 32; i += 2, puts("")) for (int j = 3; j--;) for (k = 2; k--;) for (m = 256; m > 1; (m /= 2, printf((~w16b[i + 1 - k] & m) ? "##" : "  ")));
+    for (int i = 0; i < 32; i += 2, puts("")) for (int j = 3; j--;) for (k = 2; k--;) for (m = 256; m > 1; (m /= 2, printf((~w8[i + 1 - k] & m) ? "##" : "  ")));
     free(dec);
     free(dec2);
     return 0;

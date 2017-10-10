@@ -18,7 +18,7 @@ CC=x86_64-w64-mingw32-gcc
 CCC=x86_64-w64-mingw32-g++
 CXX=x86_64-w64-mingw32-g++
 FC=x86_64-w64-mingw32-gfortran
-AS=as
+AS=nasm
 
 # Macros
 CND_PLATFORM=x86_64-w64-mingw32-Windows
@@ -68,7 +68,7 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ataribombs.exe: ${OBJECTFILES}
 ${OBJECTDIR}/main.o: main.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I../../GM-GMP -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.c
+	$(COMPILE.c) -g -I../../GM-GMP -I../../bitFlip -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.c
 
 # Subprojects
 .build-subprojects:
